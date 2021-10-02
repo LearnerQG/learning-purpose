@@ -78,6 +78,21 @@ Then we have this one which is very crucial "npm i --save-dev dotenv"
 
 /* localhost:3000 will not work without ***liveserver */
 
-// sending the file to github:
-//   git config --global user.email "you@example.com"
-//   git config --global user.name "Your Name" or   git config --global user.password "Your password"
+/* sending the file to github:
+  1. git config --global user.email "you@example.com"   
+  2.git config --global user.password "Your password" or git config --global user.name "Your Name"
+    3.git init
+    4.git commit -m "write anything you want to"
+
+    Then create a repository in the github account
+    And then copy the commands that are available under the or push an existing repository from the command line
+
+    for this app it was:
+1.First one: git remote add origin https://github.com/LearnerQG/mybrary-2.git
+2.2nd One(i didn't use this): git branch -M main
+3.Third one: git push -u origin main
+  And save the links like this.
+  
+
+
+  */
