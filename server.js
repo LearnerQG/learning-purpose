@@ -95,10 +95,10 @@ Then we have this one which is very crucial "npm i --save-dev dotenv"
   
 Then later to update all the newly added data in your desktops folder you need to do these following steps:
 1. git init     
-2. git add .   (this one is a must)
-3. git commit -m "anything you can type here" (and here the -m represents the main branch as far as i know)
+2. git add .   (this one is a must before the 3rd step)
+3. git commit -m "anything you can type here" (and here the -m represents the main branch as far as i know. this one is must as well before the 4th step)
 4. git push -u origin main
 
-And doing that will even update the new newly added words in an already existed file like this file to the githubs file that is with the same name as this file.So even the server.s's data will be updated.
+Going step by step about the above updating a file of github topic is a must and doing that will even update the newly added words in an already existed file like this file to the githubs file that is with the same name. So even the server.js's data will be updated.
 
   */
