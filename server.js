@@ -93,6 +93,12 @@ Then we have this one which is very crucial "npm i --save-dev dotenv"
 3.Third one: git push -u origin main
   And save the links like this.
   
+Then later to update all the newly added data in your desktops folder you need to do these following steps:
+1. git init     
+2. git add .   (this one is a must)
+3. git commit -m "anything you can type here" (and here the -m represents the main branch as far as i know)
+4. git push -u origin main
 
+And doing that will even update the new newly added words in an already existed file like this file to the githubs file that is with the same name as this file.So even the server.s's data will be updated.
 
   */
