@@ -130,4 +130,10 @@ And i want to to answer this question whih is does using git push heroku main go
   8. heroku git:remote -a yourappname (and this one is only done once and this command appears under the deploy section of you heroku app dashboard page. after running it once it will not show this command back again. From then on you will be left with this command which is "heroku git:clone -a mybrary-web-dev6-2") so we have "heroku git:clone -a mybrary-web-dev6-2" from then on.
   8. and the last one is "git push heroku main"
 
+  And only doing the git push heroku main will not make changes to github. So to make changes to github you have to follow git add . git commit -m "AAA" and git push -u origin main
+
+  And git push heroku main will not directy update the files to the heroku app. First you have to do git add . then the git commit -m "ADSD"
+
+  Done. 
+
 */
