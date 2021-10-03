@@ -113,6 +113,12 @@ And then i ran:
 Remember in the third command the master is changed to main as git gives to options main and branch.
 */
 
+/* And then go to heroku apps settings ad then click reveal config vars and in the key field type DATABASE_URL and keep the value field empty for a while
+  create the mongodb and then click build a cluster then create cluster and then click connect and then put a name in the username and click auto genarate password and copy that password and paste it that value field of reveal config vars of heroku app and then click Create Mongodb user and then click choose a connenction method and then click connect your application and then copy the connection string and paste that before the password of the reveal config vars value field and cut that password and replace it in the<password> and it;s important to remember that the usenname field will be like this <user> if you didn't enter username in the section that appears after clicking the connect of the mongodb atlas part
+1. auto genarate password
+2. then 
+*/
+
 /*
 And i want to to answer this question whih is does using git push heroku main going to push your newly added data of your harddrive to the git and heroku?
 */
