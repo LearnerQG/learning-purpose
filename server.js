@@ -93,7 +93,7 @@ Then we have this one which is very crucial "npm i --save-dev dotenv"
 3.Third one: git push -u origin main
   And save the links like this.
   
-Then later to update all the newly added data in your desktops folder you need to do these following steps:
+Then later to **update all the newly added data in your desktops folder you need to do these following steps:
 1. git init     
 2. git add .   (this one is a must before the 3rd step)
 3. git commit -m "anything you can type here" (and here the -m represents the main branch as far as i know. this one is must as well before the 4th step)
@@ -113,17 +113,14 @@ And then i ran:
 Remember in the third command the master is changed to main as git gives to options main and branch.
 */
 
-/* And then go to heroku apps settings ad then click reveal config vars and in the key field type DATABASE_URL and keep the value field empty for a while
+/* Heroku reveal config vars+ Mongodb atlas part: And then go to heroku apps settings ad then click reveal config vars and in the key field type DATABASE_URL and keep the value field empty for a while
   create the mongodb and then click build a cluster then create cluster and then click connect and then put a name in the username and click auto genarate password and copy that password and paste it that value field of reveal config vars of heroku app and then click Create Mongodb user and then click choose a connenction method and then click connect your application and then copy the connection string and paste that before the password of the reveal config vars value field and cut that password and replace it in the<password> and it;s important to remember that the usenname field will be like this <user> if you didn't enter username in the section that appears after clicking the connect of the mongodb atlas part
-1. auto genarate password
-2. then 
 */
 
 /*
-And i want to to answer this question whih is does using git push heroku main going to push your newly added data of your harddrive to the git and heroku?
-*/
+And i want to to answer this question which is, does using git push heroku main going to push your newly added data of your harddrive to the git and heroku?
 
-/* the answer is no. The last time i lost all my data of the harddrive and i couldn't recover the new changes of my project that i had on my local disk because i wasn't doing the git add . git commit -m ""AA" and git push -u origin main to get them to github first and then the git push heroku main instead i was scattered with it because I was a beginner. And i learned my lessons and now i get it. I have to forst run the first 4 steps which are
+the answer is no. The last time i lost all my data of the harddrive and i couldn't recover the new changes of my project that i had on my local disk because i wasn't doing the git add . git commit -m ""AA" and git push -u origin main to get them to github first and then the git push heroku main instead i was scattered with it because I was a beginner. And i learned my lessons and now i get it. I have to forst run the first 4 steps which are
   1. git init  
   2. git config --global user.email "you@example.com"   
   3.git config --global user.password "Your password" or git config --global user.name "Your Name"    
@@ -142,4 +139,7 @@ And i want to to answer this question whih is does using git push heroku main go
 
   Done. 
 
+*/
+
+/* what to do when i delete the local drives data. Then if i download the data from github how am i supposed to connect that data to github already xisting repository?
 */
