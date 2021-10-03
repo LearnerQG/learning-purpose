@@ -102,3 +102,32 @@ Then later to update all the newly added data in your desktops folder you need t
 Going step by step about the above updating a file of github topic is a must and doing that will even update the newly added words in an already existed file like this file to the githubs file that is with the same name. So even the server.js's data will be updated.
 
   */
+
+/*
+and after that i created a heroku app without any pipeline.
+
+And then i ran:
+1. heroku login
+2. heroku git:remote -a mybrary-web-dev6-2
+3. git push heroku main
+Remember in the third command the master is changed to main as git gives to options main and branch.
+*/
+
+/*
+And i want to to answer this question whih is does using git push heroku main going to push your newly added data of your harddrive to the git and heroku?
+*/
+
+/* the answer is no. The last time i lost all my data of the harddrive and i couldn't recover the new changes of my project that i had on my local disk because i wasn't doing the git add . git commit -m ""AA" and git push -u origin main to get them to github first and then the git push heroku main instead i was scattered with it because I was a beginner. And i learned my lessons and now i get it. I have to forst run the first 4 steps which are
+  1. git init  
+  2. git config --global user.email "you@example.com"   
+  3.git config --global user.password "Your password" or git config --global user.name "Your Name"    
+  4. git add .   (this one is a must before the 3rd step)
+  5. and then this command is only run once to push existing local drives file to git, for me it was: "git remote add origin https://github.com/LearnerQG/mybrary-2.git" and this appears after creating a repository to add files to that repository and it varies repository to repository
+  6. This one is optional: "git branch -M main"
+  5. git commit -m "anything you can type here" (and here the -m represents the main branch as far as i know. this one is must as well before the 4th step)
+  6. git push -u origin main
+  7. heroku login
+  8. heroku git:remote -a yourappname (and this one is only done once and this command appears under the deploy section of you heroku app dashboard page. after running it once it will not show this command back again. From then on you will be left with this command which is "heroku git:clone -a mybrary-web-dev6-2") so we have "heroku git:clone -a mybrary-web-dev6-2" from then on.
+  8. and the last one is "git push heroku main"
+
+*/
