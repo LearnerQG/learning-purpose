@@ -19,9 +19,9 @@ app.use(expressLayouts)
 app.use(express.static('public'))       
 
 const indexRouter = require('./routes/index')  
-
+const authorsRouter = require('./routes/author.js')
 app.use('/', indexRouter) 
-
+app.use('/allauthors', authorsRouter) // in localhost i have to write localhost:3000/allauthors now to acces author folders ejses
 const mongoose = require('mongoose')
 
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true});
