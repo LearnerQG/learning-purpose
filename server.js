@@ -121,7 +121,11 @@ Remember in the third command the master is changed to main as git gives to opti
 And i want to to answer this question which is, does using git push heroku main going to push your newly added data of your harddrive to the git and heroku?
 
 the answer is no. The last time i lost all my data of the harddrive and i couldn't recover the new changes of my project that i had on my local disk because i wasn't doing the git add . git commit -m ""AA" and git push -u origin main to get them to github first and then the git push heroku main instead i was scattered with it because I was a beginner. And i learned my lessons and now i get it. I have to forst run the first 4 steps which are
-  1. git init  
+
+***the only method i found was when the start page apears after opening the
+vs code clicking the git clone repository and from there signing in to the github account
+
+1. git init  
   2. git config --global user.email "you@example.com"   
   3.git config --global user.password "Your password" or git config --global user.name "Your Name"    
   4. git add .   (this one is a must before the 3rd step)
