@@ -133,7 +133,7 @@ the answer is no. The last time i lost all my data of the harddrive and i couldn
 5. git commit -m "anything you can type here" (and here the -m represents the main branch as far as i know. this one is must as well before the 4th step)
 6. git push -u origin main
 7. heroku login
-8. heroku git:remote -a yourappname (and this one is only done once and this command appears under the deploy section of you heroku app dashboard page. after running it once it will not show this command back again. From then on you will be left with this command which is "heroku git:clone -a mybrary-web-dev6-2") so we have "heroku git:clone -a mybrary-web-dev6-2" from then on.
+8. heroku git:remote -a yourappname (You need to store this command for cloning)(and this one is only done once and this command appears under the deploy section of you heroku app dashboard page. after running it once it will not show this command back again. From then on you will be left with this command which is "heroku git:clone -a mybrary-web-dev6-2") so we have "heroku git:clone -a mybrary-web-dev6-2" from then on.
 8. and the last one is "git push heroku main"
 
 And only doing the git push heroku main will not make changes to github. So to make changes to github you have to follow git add . git commit -m "AAA" and git push -u origin main
@@ -165,6 +165,12 @@ Then close the vs code and enter that repository hat has been cloned in your loc
 git add .
 git commit -m "Anything"
 git push -u origin main
+
+And to push o heroku you need to be careful and you need to remember that heroku git:remote -a mybrary-web-dev6-2 command that dissapears once you deploy rour app to heroku. Then run these two commands:
+  
+   heroku git:remote -a mybrary-web-dev6-2
+   git push heroku main
+
 ]
 
 */
