@@ -161,8 +161,10 @@ iii. The very last way that i couldn't make use of is the using of commands in t
   git config --global user.email "yourgitprofilesemail"
   git config --global user.password "yourgitprofilespassword"
   git clone thencopythehttpslinkbyopeningthemenuofthedownloadofyourrepository
-And if the above code says emtyrepository then just run "git add ." and "git commit -m "anythngocanwrite"
-and then run that above code for cloning again.**and also try to write the repository name same as the git profiles repository name and also try to download the https git repository first.
+Then close the vs code and enter that repository hat has been cloned in your local machine or the local drive and then right click there and click open with vs code and from then on you will be able to update the localdrives changes to the githubs files just as before. and remember the way for this was
+git add .
+git commit -m "Anything"
+git push -u origin main
 ]
 
 */
