@@ -1,6 +1,6 @@
 if (process.env.NODE_ENV !== 'production'){
-        require('dotenv').config()
- } 
+  require('dotenv').config()
+} 
 
 const express = require('express')      
 
@@ -51,7 +51,7 @@ go to the packkage.json and type
 2."npm i express ejs express-ejs-layouts"                        
 
 3.use    " npm install -g nodemon  " instead of " npm i --save-dev nodemon " 
- 
+
 and remove the quotes  and lastly to start nodemon type to execute the start script:                 4."nodemon start"
 or "npm run devStart"                    ]***
 
@@ -79,20 +79,21 @@ Then we have this one which is very crucial "npm i --save-dev dotenv"
 /* localhost:3000 will not work without ***liveserver */
 
 /* sending the file to github:
-  1. git config --global user.email "you@example.com"   
-  2.git config --global user.password "Your password" or git config --global user.name "Your Name"
-    3.git init
-    4.git commit -m "write anything you want to"
+1. git config --global user.name "yourgitprofilesname"
+2. git config --global user.email "you@example.com"   
+3.git config --global user.password "Your password" or git config --global user.name "Your Name"
+4.git init
+5.git commit -m "write anything you want to"
 
-    Then create a repository in the github account
-    And then copy the commands that are available under the or push an existing repository from the command line
+Then create a repository in the github account
+And then copy the commands that are available under the or push an existing repository from the command line
 
-    for this app it was:
+for this app it was:
 1.First one: git remote add origin https://github.com/LearnerQG/mybrary-2.git
 2.2nd One(i didn't use this): git branch -M main
 3.Third one: git push -u origin main
-  And save the links like this.
-  
+And save the links like this.
+
 Then later to **update all the newly added data in your desktops folder you need to do these following steps:
 1. git init     
 2. git add .   (this one is a must before the 3rd step)
@@ -101,7 +102,7 @@ Then later to **update all the newly added data in your desktops folder you need
 
 Going step by step about the above updating a file of github topic is a must and doing that will even update the newly added words in an already existed file like this file to the githubs file that is with the same name. So even the server.js's data will be updated.
 
-  */
+*/
 
 /*
 and after that i created a heroku app without any pipeline.
@@ -110,11 +111,11 @@ And then i ran:
 1. heroku login
 2. heroku git:remote -a mybrary-web-dev6-2
 3. git push heroku main
-Remember in the third command the master is changed to main as git gives to options main and branch.
+Remember in the third command the master is changed to main as git gives tqo options main and branch.
 */
 
 /* Heroku reveal config vars+ Mongodb atlas part: And then go to heroku apps settings ad then click reveal config vars and in the key field type DATABASE_URL and keep the value field empty for a while
-  create the mongodb and then click build a cluster then create cluster and then click connect and then put a name in the username and click auto genarate password and copy that password and paste it that value field of reveal config vars of heroku app and then click Create Mongodb user and then click choose a connenction method and then click connect your application and then copy the connection string and paste that before the password of the reveal config vars value field and cut that password and replace it in the<password> and it;s important to remember that the usenname field will be like this <user> if you didn't enter username in the section that appears after clicking the connect of the mongodb atlas part
+create the mongodb and then click build a cluster then create cluster and then click connect and then put a name in the username and click auto genarate password and copy that password and paste it that value field of reveal config vars of heroku app and then click Create Mongodb user and then click choose a connenction method and then click connect your application and then copy the connection string and paste that before the password of the reveal config vars value field and cut that password and replace it in the<password> and it;s important to remember that the usenname field will be like this <user> if you didn't enter username in the section that appears after clicking the connect of the mongodb atlas part
 */
 
 /*
@@ -124,27 +125,63 @@ the answer is no. The last time i lost all my data of the harddrive and i couldn
 
 
 1. git init  
-  2. git config --global user.email "you@example.com"   
-  3.git config --global user.password "Your password" or git config --global user.name "Your Name"    
-  4. git add .   (this one is a must before the 3rd step)
-  5. and then this command is only run once to push existing local drives file to git, for me it was: "git remote add origin https://github.com/LearnerQG/mybrary-2.git" and this appears after creating a repository to add files to that repository and it varies repository to repository
-  6. This one is optional: "git branch -M main"
-  5. git commit -m "anything you can type here" (and here the -m represents the main branch as far as i know. this one is must as well before the 4th step)
-  6. git push -u origin main
-  7. heroku login
-  8. heroku git:remote -a yourappname (and this one is only done once and this command appears under the deploy section of you heroku app dashboard page. after running it once it will not show this command back again. From then on you will be left with this command which is "heroku git:clone -a mybrary-web-dev6-2") so we have "heroku git:clone -a mybrary-web-dev6-2" from then on.
-  8. and the last one is "git push heroku main"
+2. git config --global user.email "you@example.com"   
+3.git config --global user.password "Your password" or git config --global user.name "Your Name"    
+4. git add .   (this one is a must before the 3rd step)
+5. and then this command is only run once to push existing local drives file to git, for me it was: "git remote add origin https://github.com/LearnerQG/mybrary-2.git" and this appears after creating a repository to add files to that repository and it varies repository to repository
+6. This one is optional: "git branch -M main"
+5. git commit -m "anything you can type here" (and here the -m represents the main branch as far as i know. this one is must as well before the 4th step)
+6. git push -u origin main
+7. heroku login
+8. heroku git:remote -a yourappname (and this one is only done once and this command appears under the deploy section of you heroku app dashboard page. after running it once it will not show this command back again. From then on you will be left with this command which is "heroku git:clone -a mybrary-web-dev6-2") so we have "heroku git:clone -a mybrary-web-dev6-2" from then on.
+8. and the last one is "git push heroku main"
 
-  And only doing the git push heroku main will not make changes to github. So to make changes to github you have to follow git add . git commit -m "AAA" and git push -u origin main
+And only doing the git push heroku main will not make changes to github. So to make changes to github you have to follow git add . git commit -m "AAA" and git push -u origin main
 
-  And git push heroku main will not directy update the files to the heroku app. First you have to do git add . then the git commit -m "ADSD"
+And git push heroku main will not directy update the files to the heroku app. First you have to do git add . then the git commit -m "ADSD"
 
-  Done. 
+Done. 
 
 */
 
-/* what to do when i delete the local drives data. Then if i download the data from github how am i supposed to connect that data to github already xisting repository?
+/* what to do when i delete the local drives data. Then if i download the data from github how am i supposed to connect that data to github's already xisting repository?
 
-***the only method i found was when the start page apears after opening the vs code clicking the git clone repository and from there signing in to the github account
+***[1. 
+i. the only method i found was when the start page apears after opening the vs code clicking the git clone repository and from there signing in to the github account.
+
+***********And to sign out click the icon above the settings icon in the bottom left corner.
+
+ii. the other way is pressing ctrl+shift+G and then clicking the threedots(...) and then clicking clone and proceeding from there including signing in to gihub
+
+***********And to sign out click the icon above the settings icon in the bottom left corner.
+
+iii. The very last way that i couldn't make use of is the using of commands in the terminal when cmd is chosen or bash is chosen. The commands were:
+  git init 
+  git config --global user.name "yourgitprofilesusername"
+  git config --global user.email "yourgitprofilesemail"
+  git config --global user.password "yourgitprofilespassword"
+  git clone thencopythehttpslinkbyopeningthemenuofthedownloadofyourrepository
+And if the above code says emtyrepository then just run "git add ." and "git commit -m "anythngocanwrite"
+and then run that above code for cloning again.**and also try to write the repository name same as the git profiles repository name and also try to download the https git repository first.
+]
+
+*/
+
+
+/* How to sign out of the githubs account from the vscode:
+***********And to sign out click the icon above the settings icon in the bottom left corner.
+*/
+
+/* The common mistakes that occurs
+
+i. The git login using terminal. Sometimes you need to add the 
+   git config --global user.name "yourgitprofilesusername"
+to also enter the username of git besides the email
+   git config --global user.email "yourgitprofilesemail"
+and password
+   git config --global user.password "yourgitprofilespassword"
+of ones github profile.
+
+
 
 */
