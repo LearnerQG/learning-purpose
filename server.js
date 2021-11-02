@@ -27,7 +27,7 @@ const mongoose = require('mongoose')
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true});
 // options usecreateindex, usefindandmodify are not supported
 // my last code was like this: mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false }); *And that was giving me mongoose error.
-
+// And the process.env.DATABASE_URL works just as i menion here. It first takes the .env file and that it grabs the DATABASE_URL of that .env file and takes the value that is after equal sign. In our case the va;lue is mongodb://localhost/mybrary
 const db = mongoose.connection
 
 db.on('error', error=>console.error(error))

@@ -1,7 +1,6 @@
 {
   "name": "nodejs-mybrary-part-1",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "dependencies": {
     "ejs": "^3.1.6",
@@ -19,5 +18,14 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LearnerQG/mybrary-2.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LearnerQG/mybrary-2/issues"
+  },
+  "homepage": "https://github.com/LearnerQG/mybrary-2#readme",
+  "description": ""
 }
