@@ -8,6 +8,12 @@ const app = express()
 
 const expressLayouts = require('express-ejs-layouts')   
 
+      
+const bodyParser = require('body-parser')
+
+const indexRouter = require('./routes/index')  
+const authorRouter = require('./routes/authors.js')
+
 app.set('view engine','ejs')    
 
 app.set('views', __dirname + '/views')   
@@ -16,17 +22,17 @@ app.set('layout', 'layouts/layout')
 
 app.use(expressLayouts) 
 
-app.use(express.static('public'))       
+app.use(express.static('public')) 
 
-const indexRouter = require('./routes/index')  
-const authorRouter = require('./routes/authors.js')
+app.use(bodyParser.urlencoded({ limit: '10mb', extended:false})) // app.use(bodyParser.urlencoded({ limit: '10mb', extended:false})) must be used before const mongoose = require('mongoose')
+// Otherwise it will throw an error while displaying the submitted input to the post route with '/'
 
 const mongoose = require('mongoose')
 
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true});
 // options usecreateindex, usefindandmodify are not supported
 // my last code was like this: mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false }); *And that was giving me mongoose error.
-// And the process.env.DATABASE_URL works just as i menion here. It first takes the .env file and that it grabs the DATABASE_URL of that .env file and takes the value that is after equal sign. In our case the va;lue is mongodb://localhost/mybrary
+// And the process.env.DATABASE_URL works just as i menion here. It first takes the .env file and that it grabs the DATABASE_URL of that .env file and takes the value that is after equal(=) sign. In our case the value is mongodb://localhost/mybrary
 const db = mongoose.connection
 
 db.on('error', error=>console.error(error))
