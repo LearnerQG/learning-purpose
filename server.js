@@ -19,9 +19,8 @@ app.use(expressLayouts)
 app.use(express.static('public'))       
 
 const indexRouter = require('./routes/index')  
-const authorsRouter = require('./routes/author.js')
-app.use('/', indexRouter) 
-app.use('/allauthors', authorsRouter) // in localhost i have to write localhost:3000/allauthors now to acces author folders ejses
+const authorRouter = require('./routes/authors.js')
+
 const mongoose = require('mongoose')
 
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true});
@@ -34,6 +33,9 @@ db.on('error', error=>console.error(error))
 
 
 db.once('open', ()=> console.log('Connected to mongoose'))
+
+app.use('/', indexRouter) 
+app.use('/authors', authorRouter) // in localhost i have to write localhost:3000/authors now to acces authors folders ejses
 
 app.listen(process.env.PORT||3000)      
 
