@@ -1,39 +1,31 @@
 const express = require('express')
 const router = express.Router()
-const Author = require('../models/authorcopy.js')
+const Author = require('../models/author.js')
 
 // All author route
-// router.get('/',async (req,res)=>{
-//     let searchOptions = {}
-//     if (req.query.name3 != null && req.query.name3 !== '') {
-//        searchOptions.name = new RegExp(req.query.name3, 'i')
-//     }
-//     try{
-//         const authors = await Author.find(searchOptions)
-//         res.render('authors/index.ejs', {
-//             authors: authors,
-//              searchOptions: req.query
-//         } )
-//     }
-//     catch{
-//         res.redirect('/')
-//     }
-    
-// })
-
-// experiment author route
 router.get('/',async (req,res)=>{
+    let searchOptions = {}
+    if (req.query.name3 != null && req.query.name3 !== '') {
+       searchOptions.name = new RegExp(req.query.name3, 'i')
+    }
     try{
-const authors = await Author.find({})
-res.render('authors/index',{
-    authors:authors
-})
+        const authors = await Author.find(searchOptions)
+        res.render('authors/index.ejs', {
+            authors: authors,
+             searchOptions: req.query
+        } )
     }
     catch{
-res.redirect(`/`)
+        res.redirect('/')
     }
+    
 })
-
+router.get('/random', (req,res)=>{
+    res.render('authors/random.ejs', {ra: "asds" })
+})
+router.get('/experiment', (req,res)=>{
+    res.render('partials/ra.ejs')
+})
 // New author route
 router.get('/new', (req,res)=>{
     res.render('authors/new.ejs'/*, {author: new Author() }*/)
@@ -51,7 +43,7 @@ res.redirect(`authors`)
 }
 catch{
    res.render('authors/new', {
-       author: author,
+       author: author, 
        errorMessage: 'Error creating Author'
    }) 
 }

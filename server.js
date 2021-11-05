@@ -43,7 +43,7 @@ db.once('open', ()=> console.log('Connected to mongoose'))
 app.use('/', indexRouter) 
 app.use('/authors', authorRouter) // in localhost i have to write localhost:3000/authors now to acces authors folders ejses
 
-app.listen(process.env.PORT||3000)      
+app.listen(process.env.PORT||4000)      
 
 
 // Softwares: vs code(Link:https://code.visualstudio.com/download), nodejs ( add it to the system environment path and also thenwards go to cmd and write "node --version" Link:https://nodejs.org/en/download/), mongodb(Link: https://www.mongodb.com/try/download/community), git( add it to the system environment path and also thenwards go to cmd and write "git --version" Link:https://git-scm.com/downloads or https://git-scm.com/download/win), heroku cli( Link: https://devcenter.heroku.com/articles/heroku-cli#download-and-install or https://devcenter.heroku.com/articles/heroku-cli)
@@ -58,7 +58,13 @@ go to the packkage.json and type
 ***[ 1."npm init -y"                    
 2."npm i express ejs express-ejs-layouts"                        
 
-3.use    " npm install -g nodemon  " instead of " npm i --save-dev nodemon " 
+3.use    " npm i --save-dev nodemon  " instead of " npm install -g nodemon " . You must because in the package.json it must be under the devdependencies section
+
+4. use "npm i body-parser" to install body parser
+
+5. "npm i --save-dev dotenv"
+
+6. npm i -g mongoose
 
 and remove the quotes  and lastly to start nodemon type to execute the start script:                 4."nodemon start"
 or "npm run devStart"                    ]***
