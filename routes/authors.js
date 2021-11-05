@@ -22,8 +22,16 @@ const Author = require('../models/authorcopy.js')
 // })
 
 // experiment author route
-router.get('/', (req,res)=>{
-    res.render('authors/index.ejs'/*, {author: new Author() }*/)
+router.get('/',async (req,res)=>{
+    try{
+const authors = await Author.find({})
+res.render('authors/index',{
+    authors:authors
+})
+    }
+    catch{
+res.redirect(`/`)
+    }
 })
 
 // New author route
