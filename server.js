@@ -13,6 +13,7 @@ const bodyParser = require('body-parser')
 
 const indexRouter = require('./routes/index')  
 const authorRouter = require('./routes/authors.js')
+const bookRouter = require('./routes/books.js')
 
 app.set('view engine','ejs')    
 
@@ -42,8 +43,8 @@ db.once('open', ()=> console.log('Connected to mongoose'))
 
 app.use('/', indexRouter) 
 app.use('/authors', authorRouter) // in localhost i have to write localhost:3000/authors now to acces authors folders ejses
-
-app.listen(process.env.PORT||4000)      
+app.use('/books', bookRouter)
+app.listen(process.env.PORT||3000)      
 
 
 // Softwares: vs code(Link:https://code.visualstudio.com/download), nodejs ( add it to the system environment path and also thenwards go to cmd and write "node --version" Link:https://nodejs.org/en/download/), mongodb(Link: https://www.mongodb.com/try/download/community), git( add it to the system environment path and also thenwards go to cmd and write "git --version" Link:https://git-scm.com/downloads or https://git-scm.com/download/win), heroku cli( Link: https://devcenter.heroku.com/articles/heroku-cli#download-and-install or https://devcenter.heroku.com/articles/heroku-cli)
