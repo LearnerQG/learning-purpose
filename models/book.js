@@ -1,4 +1,7 @@
 const mongoose = require('mongoose')
+const path = require('path')
+
+const coverImageBasePath = 'uploads/bookCovers'
 
 const bookSchema = new mongoose.Schema({
     title:{
@@ -26,7 +29,7 @@ const bookSchema = new mongoose.Schema({
         required: true
     },
     coverImageName:{
-        // instead of actually saving the image in the database we just save the name of the image as string and we save the file on our server in the filesystem
+        // instead of actually saving the image in the database we just save the name of the image as string and we save the file on our server in the filesystem. And the filesystem is the left sidebar of vs code that appears when we click the explorer icon or when we type ctrl+shift+E
         type: String,
         required: true
     },
@@ -38,4 +41,10 @@ const bookSchema = new mongoose.Schema({
 
 })
 
+bookSchema.virtual('coverImagePath').get(function(){
+    if(this.coverImageName!=null){
+        return path.join('/', coverImageBasePath, this.coverImageName)
+    }
+})
 module.exports = mongoose.model('Book', bookSchema)
+module.exports.coverImageBasePath = coverImageBasePath

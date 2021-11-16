@@ -17,6 +17,7 @@
     <!--I did experiment of the above with this ra.ejs partial <%- include('../partials/ra.ejs')%> -->
 
     <%- body %> 
-   
+   <!-- And when we add the file with render with .js in routes then it gets added to the body.
+But if the file is not rendered it is not be added to the body and it is going to take a whole the route mentioned in the router.get of that .js of the routes folder and it is going to avoid showing anything that is inside the layout.ejs of any thing that is not taking that url based upon .post and .get thats after the router. keyword such as router.get or router.post -->
 </body>
 </html>

@@ -10,6 +10,8 @@ const expressLayouts = require('express-ejs-layouts')
 
       
 const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
+
 
 const indexRouter = require('./routes/index')  
 const authorRouter = require('./routes/authors.js')
@@ -18,10 +20,12 @@ const bookRouter = require('./routes/books.js')
 app.set('view engine','ejs')    
 
 app.set('views', __dirname + '/views')   
-
+// Now in rendering the directory in author.js or in index.js or in any .js of the routes folder, it will not need us to render the whole thing with ../views/... because it has already been declared that the view is coming from /views
 app.set('layout', 'layouts/layout')    
 
 app.use(expressLayouts) 
+
+app.use(methodOverride('_method')) 
 
 app.use(express.static('public')) 
 
@@ -209,4 +213,9 @@ of ones github profile.
 
 */
 
+/* 
+Sometimes the package.json show error in
+ the first line in the { To overcome this
+    ctrl+shift+P then type open user settings and then from the left sidebar under user tab go to JSON and unchek where it says JSON schemadownload
+*/
 /* to overcome */
