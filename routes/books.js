@@ -46,7 +46,7 @@ router.post('/', upload.single('cover'), async (req,res)=>{
    const fileName = req.file != null ? req.file.filename : null
 const book = new Book({
     title: req.body.title2,
-    author: req.body.author2,
+    author1: req.body.author3,
     publishDate: new Date(req.body.publishDate2),
     pageCount: req.body.pageCount2,
     coverImageName: fileName,

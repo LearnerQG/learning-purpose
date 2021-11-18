@@ -48,6 +48,7 @@ db.once('open', ()=> console.log('Connected to mongoose'))
 app.use('/', indexRouter) 
 app.use('/authors', authorRouter) // in localhost i have to write localhost:3000/authors now to acces authors folders ejses
 app.use('/books', bookRouter)
+var WORKERS = process.env.WEB_CONCURRENCY || 1;
 app.listen(process.env.PORT||3000)      
 
 
@@ -218,4 +219,6 @@ Sometimes the package.json show error in
  the first line in the { To overcome this
     ctrl+shift+P then type open user settings and then from the left sidebar under user tab go to JSON and unchek where it says JSON schemadownload
 */
-/* to overcome */
+/* to overcome:
+npm i socket.io bcrypt uuid
+*/

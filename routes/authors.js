@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Author = require('../models/author.js')
-
+const Book = require('../models/book')
 // All author route
 router.get('/',async (req,res)=>{
     let searchOptions = {}
@@ -13,7 +13,7 @@ router.get('/',async (req,res)=>{
         res.render('authors/index.ejs', {
     //This is the comment from the server.js's app.set('view',....)'s comment. {Now in rendering the directory in author.js or in index.js or in any .js of the routes folder, it will not need us to render the whole thing with ../views/... because it has already been declared that the view is coming from /views}
             authors: authors,
-             searchOptions: req.query
+            searchOptions: req.query
         } )
     }
     catch{
@@ -34,18 +34,18 @@ router.get('/new', (req,res)=>{
 
 // create author route
 router.post('/',async (req,res)=>{
-    const author = new Author({
+    const author0 = new Author({
         name: req.body.name2
     })
 try{
-const newAuthor = await author.save()
-// res.redirect(`authors/${newAuthor.id}`)
-res.redirect(`authors`)
+const newAuthor = await author0.save()
+res.redirect(`authors/${newAuthor.id}`)
+// res.redirect(`authors`)
 }
 catch{
     // This automaticll catches error if a field stays emty in the form
    res.render('authors/new', {
-       author: author, 
+       author0: author0, 
        errorMessage: 'Error creating Author'
    }) 
 }
@@ -54,12 +54,20 @@ catch{
 //Show author
 router.get('/:id',async (req, res) => {
 try{
-    const author = await Author.findById(req.params.id)
- res.render('authors/show', {
-     author: author
+    const author1 = await Author.findById(req.params.id)
+ const books = await Book.find({author1 /* this author is the author that is inside the book model written as author2:{type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'Author'} And it must match that name which is author2 to show only the books of one author otherwise it will show all the books of all the author and it must be equal to he name of the author variable which is above this line */: author1.id/* And this one is the value of the previous variable. And the create author routes author variable is name author0. So that ones name doesn't matter when its comes to matching that name with author1 of this find or not */}).limit(6).exec()
+//  const booksAll = await Author.findById({author1: this.id}).limit(9).exec()
+//  const showMore = booksAll - books
+    res.render('authors/show', {
+     author1: author1,
+     booksByAuthor: books,
+    //  showMore: showMore
  })
-}catch{
-
+}catch (err){
+     console.log(err)
+res.redirect('/')
 }
 })
 
@@ -94,20 +102,21 @@ try {
 
 //Delete author
 router.delete('/:id',async (req, res) => {
-    let author
+    let author1
     try{
-         author = await Author.findById(req.params.id)
-        await author.remove()
+         author1 = await Author.findById(req.params.id)
+        //  const books = await Book.find({author1: author.id})
+        await author1.remove()
         // res.redirect(`authors/${newAuthor.id}`)
         res.redirect(`/authors`)
         }
-        catch{
+        catch (err){
             // This automaticll catches error if a field stays emty in the form
-            if(author==null){
+            if(author1==null){
                 res.redirect('/')
             }else{
-            res.redirect(`/authors/${author.id}`) 
-        }
+            res.redirect(`/authors/${author1.id}`) 
+        } console.log(err)
         }})
 
 module.exports = router

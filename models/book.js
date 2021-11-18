@@ -33,7 +33,7 @@ const bookSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    author:{
+    author1/* remember this must match the first variable of the Book.find({}) inside the show author route meaning the variable before the : of inside the { } of the Book.find({}). And the create author routes author variable is name author0. So that ones name doesn't matter when its comes to matching that name with the first variable iside the Book.find that we were talking about or not. */ :{
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'Author'
@@ -46,5 +46,6 @@ bookSchema.virtual('coverImagePath').get(function(){
         return path.join('/', coverImageBasePath, this.coverImageName)
     }
 })
+
 module.exports = mongoose.model('Book', bookSchema)
 module.exports.coverImageBasePath = coverImageBasePath
