@@ -2,8 +2,12 @@ if (process.env.NODE_ENV !== 'production'){
   require('dotenv').config()
 } // this line must be in the begining
 
-const express = require('express')      
+function haltOnTimeout(req, res, next){
+   if (!req.timeout) next()
+}
 
+const express = require('express')      
+const timeout = require('connect-timeout')
 const app = express()   
 
 const expressLayouts = require('express-ejs-layouts')   
@@ -22,6 +26,8 @@ app.set('view engine','ejs')
 app.set('views', __dirname + '/views')   
 // Now in rendering the directory in author.js or in index.js or in any .js of the routes folder, it will not need us to render the whole thing with ../views/... because it has already been declared that the view is coming from /views
 app.set('layout', 'layouts/layout')    
+
+app.use(timeout('5s'))
 
 app.use(expressLayouts) 
 
