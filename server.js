@@ -2,10 +2,17 @@ if (process.env.NODE_ENV !== 'production'){
   require('dotenv').config()
 } // this line must be in the begining
 
-function haltOnTimeout(req, res, next){
-   if (!req.timeout) next()
-}
-
+// function haltOnTimeout(req, res, next){
+//    if (!req.timeout) next()
+// }
+// const throng = require('throng')
+// var WORKERS = process.env.WEB_CONCURRENCY || 1;
+// function start() {   }
+//    throng({
+//       workers: WORKERS,
+//       lifetime: Infinity,
+//       signals: ['SIGTERM', 'SIGINT']
+//   }, start)
 const express = require('express')      
 const timeout = require('connect-timeout')
 const app = express()   
