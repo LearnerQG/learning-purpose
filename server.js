@@ -61,7 +61,11 @@ db.once('open', ()=> console.log('Connected to mongoose'))
 app.use('/', indexRouter) 
 app.use('/authors', authorRouter) // in localhost i have to write localhost:3000/authors now to acces authors folders ejses
 app.use('/books', bookRouter)
-var WORKERS = process.env.WEB_CONCURRENCY || 1;
+// var WORKERS = process.env.WEB_CONCURRENCY || 1;
+process.on('unhandledRejection', (reason, p)=>{
+   console.error('Unhandled Rejection at:', p, 'reason:', reason)
+   process.exit(1)
+})
 app.listen(process.env.PORT||3000)      
 
 
