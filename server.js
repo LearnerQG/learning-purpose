@@ -14,7 +14,7 @@ if (process.env.NODE_ENV !== 'production'){
 //       signals: ['SIGTERM', 'SIGINT']
 //   }, start)
 const express = require('express')      
-const timeout = require('connect-timeout')
+// const timeout = require('connect-timeout')
 const app = express()   
 
 const expressLayouts = require('express-ejs-layouts')   
@@ -34,7 +34,7 @@ app.set('views', __dirname + '/views')
 // Now in rendering the directory in author.js or in index.js or in any .js of the routes folder, it will not need us to render the whole thing with ../views/... because it has already been declared that the view is coming from /views
 app.set('layout', 'layouts/layout')    
 
-app.use(timeout('5s'))
+// app.use(timeout('5s'))
 
 app.use(expressLayouts) 
 
@@ -62,10 +62,7 @@ app.use('/', indexRouter)
 app.use('/authors', authorRouter) // in localhost i have to write localhost:3000/authors now to acces authors folders ejses
 app.use('/books', bookRouter)
 // var WORKERS = process.env.WEB_CONCURRENCY || 1;
-process.on('unhandledRejection', (reason, p)=>{
-   console.error('Unhandled Rejection at:', p, 'reason:', reason)
-   process.exit(1)
-})
+process.env.NODE_OPTIONS="--unhandled-rejections=strict"
 app.listen(process.env.PORT||3000)      
 
 
