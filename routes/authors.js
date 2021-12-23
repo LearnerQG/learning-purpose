@@ -6,7 +6,7 @@ const Book = require('../models/book')
 router.get('/',async (req,res)=>{
     let searchOptions = {}
     if (req.query.name3 != null && req.query.name3 !== '') {
-       searchOptions.name = new RegExp(req.query.name3, 'i')
+       searchOptions.name2 = new RegExp(req.query.name3, 'i')
     }
     try{
         const authors = await Author.find(searchOptions)
@@ -24,8 +24,29 @@ router.get('/',async (req,res)=>{
 router.get('/random', (req,res)=>{
     res.render('authors/random.ejs', {ra: "asds" })
 })
-router.get('/experiment', (req,res)=>{
-    res.render('partials/ra.ejs')
+
+
+router.get('/afterLogin',async (req,res)=>{
+    let searchOptions = {}
+       searchOptions.name2 = req.query.nameNameLogin
+    let authorLogin = await Author.find(searchOptions)
+    // let author = await Author.findById(req.params.id)
+    let authorLoginPopulate =await Author.find(searchOptions).populate('name2')
+    if(authorLogin!="")
+    {
+        // res.redirect(`/authors/authorlogin.id}`)
+        res.render('authors/afterLogin.ejs', {
+            author4: authorLogin, authorLoginPopulate:authorLoginPopulate })
+    }
+    else{
+        res.redirect('/')
+    }
+})
+router.get('/login', (req,res)=>{
+    res.render('authors/login.ejs')
+    // if(req.query.nameNameLogin==Author.find(req.query.nameNameLogin)){
+    //     res.redirect('/authors/afterLogin')
+    // }
 })
 // New author route
 router.get('/new', (req,res)=>{
@@ -35,7 +56,7 @@ router.get('/new', (req,res)=>{
 // create author route
 router.post('/',async (req,res)=>{
     const author0 = new Author({
-        name: req.body.name2
+        name2: req.body.name2
     })
 try{
 const newAuthor = await author0.save()
@@ -47,21 +68,21 @@ catch{
    res.render('authors/new', {
        author0: author0, 
        errorMessage: 'Error creating Author'
-   }) 
+   })
 }
 })
 
 //Show author
 router.get('/:id',async (req, res) => {
 try{
-    const author1 = await Author.findById(req.params.id)
- const books = await Book.find({author1 /* this author is the author that is inside the book model written as author2:{type: mongoose.Schema.Types.ObjectId,
+    const author = await Author.findById(req.params.id)
+ const books = await Book.find({author1 /* this author is the author that is inside the book model written as author1:{type: mongoose.Schema.Types.ObjectId,
     required: true,
-    ref: 'Author'} And it must match that name which is author2 to show only the books of one author otherwise it will show all the books of all the author and it must be equal to he name of the author variable which is above this line */: author1.id/* And this one is the value of the previous variable. And the create author routes author variable is name author0. So that ones name doesn't matter when its comes to matching that name with author1 of this find or not */}).limit(6).exec()
+    ref: 'Author'} And it must match that name which is author1, to show only the books of one author otherwise it will show all the books of all the author and it must be equal to he name of the author variable which is above this line */: author.id/* And this one is the value of the previous variable. And the create author routes author variable is name author0. So that ones name doesn't matter when its comes to matching that name with author1 of this find or not */}).limit(6).exec()
 //  const booksAll = await Author.findById({author1: this.id}).limit(9).exec()
 //  const showMore = booksAll - books
     res.render('authors/show', {
-     author1: author1,
+     author4: author,
      booksByAuthor: books,
     //  showMore: showMore
  })
@@ -71,21 +92,25 @@ res.redirect('/')
 }
 })
 
-// Edit
+// Edit Author Route
 router.get('/:id/edit', async (req, res) => {
        try {
            const author = await Author.findById(req.params.id) /* const because we will not be using it in the catch */
-            res.render('authors/edit', {author: author})
+           const authorDetails = await Author.findById(req.params.id).populate('name2').exec() 
+            res.render('authors/edit', {
+                author: author,             
+                authorDetails: authorDetails}
+                )
     } catch {
             res.redirect('/authors')
 }})
 
-// Update author
+// Update Author Route
 router.put('/:id', async (req, res) => {
 let author /* let because we will be using it in the catch as well */
 try {
     author = await Author.findById(req.params.id)
-    author.name = req.body.name2
+    author.name2 = req.body.name2
     await author.save()
     res.redirect(`/authors/${author.id}`)
 } catch {

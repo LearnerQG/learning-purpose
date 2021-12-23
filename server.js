@@ -62,7 +62,7 @@ app.use('/', indexRouter)
 app.use('/authors', authorRouter) // in localhost i have to write localhost:3000/authors now to acces authors folders ejses
 app.use('/books', bookRouter)
 // var WORKERS = process.env.WEB_CONCURRENCY || 1;
-process.env.NODE_OPTIONS="--unhandled-rejections=strict"
+// process.env.NODE_OPTIONS="--unhandled-rejections=strict"
 app.listen(process.env.PORT||3000)      
 
 
@@ -124,6 +124,8 @@ And then copy the commands that are available under the or push an existing repo
 
 for this app it was:
 1.First one: git remote add origin https://github.com/LearnerQG/mybrary-2.git
+1.additional. to change remote url when it shows remote origin already exists in terminal type : 
+   git remote set-url origin https://github.com/your-account/new-repo-name.git
 2.2nd One(i didn't use this): git branch -M main
 3.Third one: git push -u origin main
 And save the links like this.
