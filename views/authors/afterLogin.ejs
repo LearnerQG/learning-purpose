@@ -1,6 +1,13 @@
 <div>
    After login
-   <h2><%= author4.name2 %></h2>
-   <p><%= authorLoginPopulate %></p>
+   <% author4.forEach( author => { %>
+      <div><%= author.name2 %></div>
+      <div><%= author.id %></div>
+      <a href="/authors/<%= author.id %>">view</a>
+      <a href="/authors/<%= author.id %>/edit">edit</a>
+      <!-- <a href="/authors/<%= author.id %>">view</a> -->
+      <!-- <a href="/authors/<%= author.id %>/edit">edit</a> -->
+      <!-- <%- include('../partials/deleteForm', {url: `/authors/${author.id}`})%> -->
+  <% }) %>
 </div>
 

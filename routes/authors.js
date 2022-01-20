@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const Author = require('../models/author.js')
+const {Author} = require('../models/author.js')
 const Book = require('../models/book')
 // All author route
 router.get('/',async (req,res)=>{
@@ -9,7 +9,7 @@ router.get('/',async (req,res)=>{
        searchOptions.name2 = new RegExp(req.query.name3, 'i')
     }
     try{
-        const authors = await Author.find(searchOptions)
+        const authors = await Author.find(searchOptions);
         res.render('authors/index.ejs', {
     //This is the comment from the server.js's app.set('view',....)'s comment. {Now in rendering the directory in author.js or in index.js or in any .js of the routes folder, it will not need us to render the whole thing with ../views/... because it has already been declared that the view is coming from /views}
             authors: authors,
@@ -29,14 +29,16 @@ router.get('/random', (req,res)=>{
 router.get('/afterLogin',async (req,res)=>{
     let searchOptions = {}
        searchOptions.name2 = req.query.nameNameLogin
-    let authorLogin = await Author.find(searchOptions)
-    // let author = await Author.findById(req.params.id)
-    let authorLoginPopulate =await Author.find(searchOptions).populate('name2')
+    let authorLogin = await Author.find({name2:req.query.nameNameLogin})
+    let author = await Author.findById(req.params.id)
+    // let authorLoginPopulate =await Author.find(searchOptions).populate('name2')
     if(authorLogin!="")
     {
         // res.redirect(`/authors/authorlogin.id}`)
         res.render('authors/afterLogin.ejs', {
-            author4: authorLogin, authorLoginPopulate:authorLoginPopulate })
+            author4: authorLogin, 
+            // authorLoginPopulate:authorLoginPopulate 
+        })
     }
     else{
         res.redirect('/')
