@@ -46,9 +46,9 @@ router.get('/afterLogin',async (req,res)=>{
 })
 router.get('/login', (req,res)=>{
     res.render('authors/login.ejs')
-    // if(req.query.nameNameLogin==Author.find(req.query.nameNameLogin)){
-    //     res.redirect('/authors/afterLogin')
-    // }
+    if(req.query.nameNameLogin==Author.find(req.query.nameNameLogin)){
+    res.redirect('/authors/afterLogin')
+    }
 })
 // New author route
 router.get('/new', (req,res)=>{
