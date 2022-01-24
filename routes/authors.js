@@ -28,8 +28,18 @@ router.get('/random', (req,res)=>{
 
 router.get('/afterLogin',async (req,res)=>{
     let searchOptions = {}
-       searchOptions.name2 = req.query.nameNameLogin
-    let authorLogin = await Author.find({name2:req.query.nameNameLogin})
+  
+
+       searchOptions.name2 = req.query.nameNameLogin;
+   let authorLogin = await Author.find({name2:req.query.nameNameLogin})
+     // author.auth = req.query.nameNameLogin;
+      // await author.save();
+    //   let authorAuth = await Author.find({name2: req.query.nameNameLogin});
+
+      const authorAuth = new Author({
+          auth:req.query.nameNameLogin,
+      });
+      await authorLogin.save();
     let author = await Author.findById(req.params.id)
     // let authorLoginPopulate =await Author.find(searchOptions).populate('name2')
     if(authorLogin!="")
@@ -47,7 +57,7 @@ router.get('/afterLogin',async (req,res)=>{
 router.get('/login', (req,res)=>{
     res.render('authors/login.ejs')
     if(req.query.nameNameLogin==Author.find(req.query.nameNameLogin)){
-    res.redirect('/authors/afterLogin')
+    res.redirect('/authors/afterLogin')== false;
     }
 })
 // New author route
@@ -112,7 +122,10 @@ router.put('/:id', async (req, res) => {
 let author /* let because we will be using it in the catch as well */
 try {
     author = await Author.findById(req.params.id)
-    author.name2 = req.body.name2
+    author.name2 = req.body.name2;
+   // let authorLogin = await Author.find({name2:req.query.nameNameLogin})
+       author.auth = req.query.nameNameLogin;
+       await author.save();
     await author.save()
     res.redirect(`/authors/${author.id}`)
 } catch {
