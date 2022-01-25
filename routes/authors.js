@@ -1,6 +1,8 @@
 const express = require('express')
 const router = express.Router()
 const {Author} = require('../models/author.js')
+const {auth} = require('../models/au.js')
+const bcrypt = require('bcrypt')
 const Book = require('../models/book')
 // All author route
 router.get('/',async (req,res)=>{
@@ -35,12 +37,12 @@ router.get('/afterLogin',async (req,res)=>{
      // author.auth = req.query.nameNameLogin;
       // await author.save();
     //   let authorAuth = await Author.find({name2: req.query.nameNameLogin});
-
-      const authorAuth = new Author({
-          auth:req.query.nameNameLogin,
+let xx = bcrypt.hash(req.query.nameNameLogin, salt, 10);
+      const authorAuth = new auth({
+          auth: xx,
       });
-      await authorAuth.save()
-      await authorLogin.save();
+      await authorAuth.save();
+    //   await authorLogin.save();
     let author = await Author.findById(req.params.id)
     // let authorLoginPopulate =await Author.find(searchOptions).populate('name2')
     if(authorLogin!="")
