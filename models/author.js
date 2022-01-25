@@ -5,13 +5,10 @@ const authorSchema = new mongoose.Schema({
     name2:{
         type: String,
         required: true
-    }, 
-    auth: {
-        type: String,
     },
-    authMatch: {
+    auth:{
         type: String,
-    }, 
+    }
 })
 
 authorSchema.pre('remove', function(next){

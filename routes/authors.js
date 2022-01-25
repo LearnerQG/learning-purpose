@@ -39,6 +39,7 @@ router.get('/afterLogin',async (req,res)=>{
       const authorAuth = new Author({
           auth:req.query.nameNameLogin,
       });
+      await authorAuth.save()
       await authorLogin.save();
     let author = await Author.findById(req.params.id)
     // let authorLoginPopulate =await Author.find(searchOptions).populate('name2')
