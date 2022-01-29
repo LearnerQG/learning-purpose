@@ -22,70 +22,151 @@ router.get('/',async (req,res)=>{
         res.redirect('/')
     }
     
-})
-router.get('/random', (req,res)=>{
-    res.render('authors/random.ejs', {ra: "asds" })
-})
+}) 
+  
+  const bcrypt = require('bcrypt')
+  const passport = require('passport')
+  const flash = require('express-flash')
+  const session = require('express-session')
+  const methodOverride = require('method-override')
+  
+  const initializePassport = require('../passport-config')
+  initializePassport(
+    passport,
+    email => users.find(user => user.email === email),
+    id => users.find(user => user.id === id)
+  )
+  
+  const users = []
+  
+  app.set('view-engine', 'ejs')
+  app.use(express.urlencoded({ extended: false }))
+  app.use(flash())
+  app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false
+  }))
+  app.use(passport.initialize())
+  app.use(passport.session())
+  app.use(methodOverride('_method'))
+  
+  router.get('/', checkAuthenticated, (req, res) => {
+    res.render('index.ejs', { name: req.user.name })
+  })
+  
+  router.get('/login', checkNotAuthenticated, (req, res) => {
+    res.render('login.ejs')
+  })
+  
+  router.post('/login', checkNotAuthenticated, passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/login',
+    failureFlash: true
+  }))
+  
+  router.get('/register', checkNotAuthenticated, (req, res) => {
+    res.render('register.ejs')
+  })
+  
+  router.post('/register', checkNotAuthenticated, async (req, res) => {
+    try {
+      const hashedPassword = await bcrypt.hash(req.body.password, 10)
+      users.push({
+        id: Date.now().toString(),
+        name: req.body.name,
+        email: req.body.email,
+        password: hashedPassword
+      })
+      res.redirect('/login')
+    } catch {
+      res.redirect('/register')
+    }
+  })
+  
+  router.delete('/logout', (req, res) => {
+    req.logOut()
+    res.redirect('/login')
+  })
+  
+  function checkAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+      return next()
+    }
+    res.redirect('/login')
+  }
+  
+  function checkNotAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+      return res.redirect('/')
+    }
+    next()
+  }
 
 
-router.get('/afterLogin',async (req,res)=>{
-    let searchOptions = {}
+// router.get('/random', (req,res)=>{
+//     res.render('authors/random.ejs', {ra: "asds" })
+// })
+
+
+// router.get('/afterLogin',async (req,res)=>{
+//     let searchOptions = {}
   
 
-       searchOptions.name2 = req.query.nameNameLogin;
-   let authorLogin = await Author.find({name2:req.query.nameNameLogin})
-     // author.auth = req.query.nameNameLogin;
-      // await author.save();
-    //   let authorAuth = await Author.find({name2: req.query.nameNameLogin});
-let xx = bcrypt.hash(req.query.nameNameLogin, salt, 10);
-      const authorAuth = new auth({
-          auth: xx,
-      });
-      await authorAuth.save();
-    //   await authorLogin.save();
-    let author = await Author.findById(req.params.id)
-    // let authorLoginPopulate =await Author.find(searchOptions).populate('name2')
-    if(authorLogin!="")
-    {
-        // res.redirect(`/authors/authorlogin.id}`)
-        res.render('authors/afterLogin.ejs', {
-            author4: authorLogin, 
-            // authorLoginPopulate:authorLoginPopulate 
-        })
-    }
-    else{
-        res.redirect('/')
-    }
-})
-router.get('/login', (req,res)=>{
-    res.render('authors/login.ejs')
-    if(req.query.nameNameLogin==Author.find(req.query.nameNameLogin)){
-    res.redirect('/authors/afterLogin')== false;
-    }
-})
-// New author route
-router.get('/new', (req,res)=>{
-    res.render('authors/new.ejs'/*, {author: new Author() }*/)
-})
+//        searchOptions.name2 = req.query.nameNameLogin;
+//    let authorLogin = await Author.find({name2:req.query.nameNameLogin})
+//      // author.auth = req.query.nameNameLogin;
+//       // await author.save();
+//     //   let authorAuth = await Author.find({name2: req.query.nameNameLogin});
+// let xx = bcrypt.hash(req.query.nameNameLogin, salt, 10);
+//       const authorAuth = new auth({
+//           auth: xx,
+//       });
+//       await authorAuth.save();
+//     //   await authorLogin.save();
+//     let author = await Author.findById(req.params.id)
+//     // let authorLoginPopulate =await Author.find(searchOptions).populate('name2')
+//     if(authorLogin!="")
+//     {
+//         // res.redirect(`/authors/authorlogin.id}`)
+//         res.render('authors/afterLogin.ejs', {
+//             author4: authorLogin, 
+//             // authorLoginPopulate:authorLoginPopulate 
+//         })
+//     }
+//     else{
+//         res.redirect('/')
+//     }
+// })
+// router.get('/login', (req,res)=>{
+//     res.render('authors/login.ejs')
+//     if(req.query.nameNameLogin==Author.find(req.query.nameNameLogin)){
+//     res.redirect('/authors/afterLogin')== false;
+//     }
+// })
+// // New author route
+// router.get('/new', (req,res)=>{
+//     res.render('authors/new.ejs'/*, {author: new Author() }*/)
+// })
 
-// create author route
-router.post('/',async (req,res)=>{
-    const author0 = new Author({
-        name2: req.body.name2
-    })
-try{
-const newAuthor = await author0.save()
-res.redirect(`authors/${newAuthor.id}`)
-// res.redirect(`authors`)
-}
-catch{
-    // This automaticll catches error if a field stays emty in the form
-   res.render('authors/new', {
-       author0: author0, 
-       errorMessage: 'Error creating Author'
-   })
-}
-})
+// // create author route
+// router.post('/',async (req,res)=>{
+//     const author0 = new Author({
+//         name2: req.body.name2
+//     })
+// try{
+// const newAuthor = await author0.save()
+// res.redirect(`authors/${newAuthor.id}`)
+// // res.redirect(`authors`)
+// }
+// catch{
+//     // This automaticll catches error if a field stays emty in the form
+//    res.render('authors/new', {
+//        author0: author0, 
+//        errorMessage: 'Error creating Author'
+//    })
+// }
+// })
 
 //Show author
 router.get('/:id',async (req, res) => {
