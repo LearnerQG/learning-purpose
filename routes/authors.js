@@ -29,11 +29,14 @@ router.get('/',async (req,res)=>{
   const session = require('express-session')
   
   const initializePassport = require('../passport-config')
-  async (req, res) => initializePassport(
+  async (req, res) =>( 
+    const author = await Author.find(req.body.email),
+    initializePassport(
     passport,
-    const email = await Author.find(req.body.email),
-    const id = await Author.find(req.body.id)
-  )
+    const email = author.email,
+    const id = author.id,
+
+  ))
 
 
   app.set('view-engine', 'ejs')
@@ -49,11 +52,11 @@ router.get('/',async (req,res)=>{
   app.use(methodOverride('_method'))
   
   router.get('/', giveAuthenticated, (req, res) => {
-    res.render('../views/ndex.ejs', { name: req.user.name })
+    res.render('../views/author/index.ejs', { name: req.user.name })
   })
   
   router.get('/login', giveNotAuthenticated, (req, res) => {
-    res.render('../view/ogin.ejs')
+    res.render('../view/author/login.ejs')
   })
   
   router.post('/login', giveNotAuthenticated, passport.authenticate('local', {
@@ -63,7 +66,7 @@ router.get('/',async (req,res)=>{
   }))
   
   router.get('/register', giveNotAuthenticated, (req, res) => {
-    res.render('../view/register.ejs')
+    res.render('../view/author/register.ejs')
   })
   
   router.post('/register', giveNotAuthenticated, async (req, res) => {
