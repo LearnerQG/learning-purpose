@@ -24,19 +24,24 @@ router.get('/', giveAuthenticated, async (req,res)=>{
 }) 
   
 
-  const passport = require('passport')
+  let passport = require('passport')
   const flash = require('express-flash')
   const session = require('express-session')
   
-  const initializePassport = require('../passport-config')
-  async (req, res) =>( 
-    const author = await Author.find(req.body.email),
-    initializePassport(
+  initializePassport = require('../passport-config')
+  
+    async (req,res) => (
+   
+   // let author = await Author.find(req.body.email);
+    itializePassport(
+    author = await Author.find(req.body.email),
     passport,
-    const email = author.email,
-    const id = author.id,
-
-  ))
+     email = author.email,
+    id = author.id,
+    )
+    )
+    
+ 
 
 
   app.set('view-engine', 'ejs')
