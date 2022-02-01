@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const {Author} = require('../models/author.js')
-const {auth} = require('../models/au.js')
 const bcrypt = require('bcrypt')
 const Book = require('../models/book')
 // All author route
@@ -37,7 +36,7 @@ router.get('/',async (req,res)=>{
     const id = await Author.find(req.query.id)
   )
 
-  
+
   app.set('view-engine', 'ejs')
   app.use(express.urlencoded({ extended: false }))
   app.use(flash())
@@ -50,25 +49,25 @@ router.get('/',async (req,res)=>{
   app.use(passport.session())
   app.use(methodOverride('_method'))
   
-  router.get('/', checkAuthenticated, (req, res) => {
+  router.get('/', giveAuthenticated, (req, res) => {
     res.render('index.ejs', { name: req.user.name })
   })
   
-  router.get('/login', checkNotAuthenticated, (req, res) => {
+  router.get('/login', giveNotAuthenticated, (req, res) => {
     res.render('login.ejs')
   })
   
-  router.post('/login', checkNotAuthenticated, passport.authenticate('local', {
+  router.post('/login', giveNotAuthenticated, passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/login',
     failureFlash: true
   }))
   
-  router.get('/register', checkNotAuthenticated, (req, res) => {
+  router.get('/register', giveNotAuthenticated, (req, res) => {
     res.render('register.ejs')
   })
   
-  router.post('/register', checkNotAuthenticated, async (req, res) => {
+  router.post('/register', giveNotAuthenticated, async (req, res) => {
     try {
       const hashedPassword = await bcrypt.hash(req.body.password, 10)
       new Author({
@@ -87,14 +86,14 @@ router.get('/',async (req,res)=>{
     res.redirect('/login')
   })
   
-  function checkAuthenticated(req, res, next) {
+  function giveAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
       return next()
     }
     res.redirect('/login')
   }
   
-  function checkNotAuthenticated(req, res, next) {
+  function giveNotAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
       return res.redirect('/')
     }
@@ -142,10 +141,11 @@ router.get('/',async (req,res)=>{
 //     res.redirect('/authors/afterLogin')== false;
 //     }
 // })
-// // New author route
-// router.get('/new', (req,res)=>{
-//     res.render('authors/new.ejs'/*, {author: new Author() }*/)
-// })
+ 
+// New author route
+ router.get('/new', giveNotAuthenticated, (req,res)=>{
+    res.render('authors/new.ejs'/*, {author: new Author() }*/)
+ })
 
 // // create author route
 // router.post('/',async (req,res)=>{
