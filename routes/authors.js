@@ -49,11 +49,11 @@ router.get('/',async (req,res)=>{
   app.use(methodOverride('_method'))
   
   router.get('/', giveAuthenticated, (req, res) => {
-    res.render('index.ejs', { name: req.user.name })
+    res.render('../views/ndex.ejs', { name: req.user.name })
   })
   
   router.get('/login', giveNotAuthenticated, (req, res) => {
-    res.render('login.ejs')
+    res.render('../view/ogin.ejs')
   })
   
   router.post('/login', giveNotAuthenticated, passport.authenticate('local', {
@@ -63,7 +63,7 @@ router.get('/',async (req,res)=>{
   }))
   
   router.get('/register', giveNotAuthenticated, (req, res) => {
-    res.render('register.ejs')
+    res.render('../view/register.ejs')
   })
   
   router.post('/register', giveNotAuthenticated, async (req, res) => {
