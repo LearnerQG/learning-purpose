@@ -4,17 +4,17 @@ const {Author} = require('../models/author.js')
 const bcrypt = require('bcrypt')
 const Book = require('../models/book')
 // All author route
-router.get('/',async (req,res)=>{
+router.get('/', giveAuthenticated, async (req,res)=>{
     let searchOptions = {}
     if (req.query.name3 != null && req.query.name3 !== '') {
        searchOptions.name2 = new RegExp(req.query.name3, 'i')
     }
     try{
-        const authors = await Author.find(searchOptions);
+        const authors = await Author.find(req.body.name);
         res.render('authors/index.ejs', {
     //This is the comment from the server.js's app.set('view',....)'s comment. {Now in rendering the directory in author.js or in index.js or in any .js of the routes folder, it will not need us to render the whole thing with ../views/... because it has already been declared that the view is coming from /views}
             authors: authors,
-            searchOptions: req.query
+          //  searchOptions: req.query
         } )
     }
     catch{
@@ -51,9 +51,10 @@ router.get('/',async (req,res)=>{
   app.use(passport.session())
   app.use(methodOverride('_method'))
   
-  router.get('/', giveAuthenticated, (req, res) => {
-    res.render('../views/authors/index.ejs', { name: req.user.name })
-  })
+// above you will find this route
+  // router.get('/', giveAuthenticated, (req, res) => {
+   // res.render('../views/authors/index.ejs', { name: req.user.name })
+  // })
   
   router.get('/login', giveNotAuthenticated, (req, res) => {
     res.render('../view/authors/login.ejs')
