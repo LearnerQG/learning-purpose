@@ -31,13 +31,12 @@ router.get('/',async (req,res)=>{
   const methodOverride = require('method-override')
   
   const initializePassport = require('../passport-config')
-  initializePassport(
+  async (req, res) => initializePassport(
     passport,
-    email => users.find(user => user.email === email),
-    id => users.find(user => user.id === id)
+    const email = await Author.find(req.query.email),
+    const id = await Author.find(req.query.id)
   )
-  
-  const users = []
+
   
   app.set('view-engine', 'ejs')
   app.use(express.urlencoded({ extended: false }))
@@ -72,8 +71,7 @@ router.get('/',async (req,res)=>{
   router.post('/register', checkNotAuthenticated, async (req, res) => {
     try {
       const hashedPassword = await bcrypt.hash(req.body.password, 10)
-      users.push({
-        id: Date.now().toString(),
+      new Author({
         name: req.body.name,
         email: req.body.email,
         password: hashedPassword
