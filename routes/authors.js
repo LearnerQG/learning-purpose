@@ -166,7 +166,7 @@ router.get('/',async (req,res)=>{
 // })
 
 //Show author
-router.get('/:id',async (req, res) => {
+router.get('/:id', giveNotAuthenticated, async (req, res) => {
 try{
     const author = await Author.findById(req.params.id)
  const books = await Book.find({author1 /* this author is the author that is inside the book model written as author1:{type: mongoose.Schema.Types.ObjectId,
@@ -199,7 +199,7 @@ router.get('/:id/edit', async (req, res) => {
 }})
 
 // Update Author Route
-router.put('/:id', async (req, res) => {
+router.put('/:id', giveNotAuthenticated, async (req, res) => {
 let author /* let because we will be using it in the catch as well */
 try {
     author = await Author.findById(req.params.id)
@@ -222,7 +222,7 @@ try {
 })
 
 //Delete author
-router.delete('/:id',async (req, res) => {
+router.delete('/:id', giveNotAuthenticated, async (req, res) => {
     let author1
     try{
          author1 = await Author.findById(req.params.id)
