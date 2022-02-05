@@ -60,7 +60,9 @@ router.get('/', giveAuthenticated, async (req,res)=>{
   // router.get('/', giveAuthenticated, (req, res) => {
    // res.render('../views/authors/index.ejs', { name: req.user.name })
   // })
-  
+
+
+  /*
   router.get('/login', giveNotAuthenticated, (req, res) => {
     res.render('../view/authors/login.ejs')
   })
@@ -94,6 +96,9 @@ router.get('/', giveAuthenticated, async (req,res)=>{
     res.redirect('/login')
   })
   
+
+ 
+  
   function giveAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
       return next()
@@ -107,20 +112,20 @@ router.get('/', giveAuthenticated, async (req,res)=>{
     }
     next()
   }
-
+*/
 
 // router.get('/random', (req,res)=>{
 //     res.render('authors/random.ejs', {ra: "asds" })
 // })
 
 
-// router.get('/afterLogin',async (req,res)=>{
-//     let searchOptions = {}
+ router.get('/profile',async (req,res)=>{
+//    let searchOptions = {}
   
 
-//        searchOptions.name2 = req.query.nameNameLogin;
+//       searchOptions.name2 = req.query.nameNameLogin;
 //    let authorLogin = await Author.find({name2:req.query.nameNameLogin})
-//      // author.auth = req.query.nameNameLogin;
+      // author.auth = req.query.nameNameLogin;
 //       // await author.save();
 //     //   let authorAuth = await Author.find({name2: req.query.nameNameLogin});
 // let xx = bcrypt.hash(req.query.nameNameLogin, salt, 10);
@@ -134,7 +139,7 @@ router.get('/', giveAuthenticated, async (req,res)=>{
 //     if(authorLogin!="")
 //     {
 //         // res.redirect(`/authors/authorlogin.id}`)
-//         res.render('authors/afterLogin.ejs', {
+//         res.render('authors/profile.ejs', {
 //             author4: authorLogin, 
 //             // authorLoginPopulate:authorLoginPopulate 
 //         })
@@ -142,21 +147,21 @@ router.get('/', giveAuthenticated, async (req,res)=>{
 //     else{
 //         res.redirect('/')
 //     }
-// })
-// router.get('/login', (req,res)=>{
+})
+router.get('/login', (req,res)=>{
 //     res.render('authors/login.ejs')
 //     if(req.query.nameNameLogin==Author.find(req.query.nameNameLogin)){
 //     res.redirect('/authors/afterLogin')== false;
 //     }
-// })
+ })
  
 // New author route
- router.get('/new', giveNotAuthenticated, (req,res)=>{
+ router.get('/new', (req,res)=>{
     res.render('authors/new.ejs'/*, {author: new Author() }*/)
  })
 
 // // create author route
-// router.post('/',async (req,res)=>{
+ router.post('/',async (req,res)=>{
 //     const author0 = new Author({
 //         name2: req.body.name2
 //     })
@@ -172,10 +177,10 @@ router.get('/', giveAuthenticated, async (req,res)=>{
 //        errorMessage: 'Error creating Author'
 //    })
 // }
-// })
+ })
 
 //Show author
-router.get('/:id', giveNotAuthenticated, async (req, res) => {
+router.get('/:id', async (req, res) => {
 try{
     const author = await Author.findById(req.params.id)
  const books = await Book.find({author1 /* this author is the author that is inside the book model written as author1:{type: mongoose.Schema.Types.ObjectId,
@@ -208,7 +213,7 @@ router.get('/:id/edit', async (req, res) => {
 }})
 
 // Update Author Route
-router.put('/:id', giveNotAuthenticated, async (req, res) => {
+router.put('/:id', async (req, res) => {
 let author /* let because we will be using it in the catch as well */
 try {
     author = await Author.findById(req.params.id)
@@ -231,7 +236,7 @@ try {
 })
 
 //Delete author
-router.delete('/:id', giveNotAuthenticated, async (req, res) => {
+router.delete('/:id', async (req, res) => {
     let author1
     try{
          author1 = await Author.findById(req.params.id)
