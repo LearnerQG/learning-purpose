@@ -4,7 +4,7 @@ const {Author} = require('../models/author.js')
 const bcrypt = require('bcrypt')
 const Book = require('../models/book')
 // All author route
-router.get('/', giveAuthenticated, async (req,res)=>{
+router.get('/', async (req,res)=>{
     let searchOptions = {}
     if (req.query.name3 != null && req.query.name3 !== '') {
        searchOptions.name2 = new RegExp(req.query.name3, 'i')
@@ -23,9 +23,9 @@ router.get('/', giveAuthenticated, async (req,res)=>{
     
 }) 
   
-
+/*
   let passport = require('passport')
-  const flash = require('express-flash')
+   const flash = require('express-flash')
   const session = require('express-session')
   
   initializePassport = require('../passport-config')
@@ -46,6 +46,7 @@ router.get('/', giveAuthenticated, async (req,res)=>{
 
   app.set('view-engine', 'ejs')
   app.use(express.urlencoded({ extended: false }))
+
   app.use(flash())
   app.use(session({
     secret: process.env.SESSION_SECRET,
@@ -54,8 +55,9 @@ router.get('/', giveAuthenticated, async (req,res)=>{
   }))
   app.use(passport.initialize())
   app.use(passport.session())
-  app.use(methodOverride('_method'))
   
+  app.use(methodOverride('_method'))
+  */
 // above you will find this route
   // router.get('/', giveAuthenticated, (req, res) => {
    // res.render('../views/authors/index.ejs', { name: req.user.name })
@@ -160,23 +162,34 @@ router.get('/login', (req,res)=>{
     res.render('authors/new.ejs'/*, {author: new Author() }*/)
  })
 
+ // register page
+ router.get('/register', (req, res)=>{
+   res.render('../views/authors/register.ejs')
+ })
 // // create author route
  router.post('/',async (req,res)=>{
-//     const author0 = new Author({
-//         name2: req.body.name2
-//     })
-// try{
-// const newAuthor = await author0.save()
-// res.redirect(`authors/${newAuthor.id}`)
-// // res.redirect(`authors`)
-// }
-// catch{
+   const doesUserExist = await Author.find(req.body.email);
+   if(doesUserExist!=""){
+     res.redirect('/authors/login', {objError: "User exists"});
+   }
+  const author0 = new Author({
+         name2: req.body.name2,
+         email: req.body.email,
+         password: req.body.password,
+         auth: req.body.auth
+    })
+      try{
+      const newAuthor = await author0.save()
+ res.redirect('/authors/profile')
+ //    res.redirect(`authors`)
+   }
+      catch{
 //     // This automaticll catches error if a field stays emty in the form
-//    res.render('authors/new', {
-//        author0: author0, 
-//        errorMessage: 'Error creating Author'
-//    })
-// }
+      res.render('authors/new', {
+         author0: author0, 
+         errorMessage: 'Error creating Author'
+         })
+       }
  })
 
 //Show author

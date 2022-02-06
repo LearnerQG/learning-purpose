@@ -16,6 +16,7 @@ const authorSchema = new mongoose.Schema({
     },
     auth:{
         type: String,
+        required: true,
     }
 })
 
