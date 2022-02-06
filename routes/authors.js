@@ -167,7 +167,7 @@ router.get('/login', (req,res)=>{
    res.render('../views/authors/register.ejs')
  })
 // // create author route
- router.post('/',async (req,res)=>{
+ router.post('/register',async (req,res)=>{
    const doesUserExist = await Author.find(req.body.email);
    if(doesUserExist!=""){
      res.redirect('/authors/login', {objError: "User exists"});
