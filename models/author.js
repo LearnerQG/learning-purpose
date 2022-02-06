@@ -6,7 +6,7 @@ const authorSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    email: {
+/*    email: {
         type: String,
         required: true
     },
@@ -17,7 +17,7 @@ const authorSchema = new mongoose.Schema({
     auth:{
         type: String,
         required: true,
-    }
+    }.     */
 })
 
 authorSchema.pre('remove', function(next){

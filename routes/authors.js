@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt')
 const Book = require('../models/book')
 // All author route
 router.get('/', async (req,res)=>{
-    let searchOptions = {}
+   let searchOptions = {}
     if (req.query.name3 != null && req.query.name3 !== '') {
        searchOptions.name2 = new RegExp(req.query.name3, 'i')
     }
@@ -126,7 +126,7 @@ router.get('/', async (req,res)=>{
   
 
 //       searchOptions.name2 = req.query.nameNameLogin;
-//    let authorLogin = await Author.find({name2:req.query.nameNameLogin})
+     let authorLogin = await Author.find({name2:req.query.nameNameLogin})
       // author.auth = req.query.nameNameLogin;
 //       // await author.save();
 //     //   let authorAuth = await Author.find({name2: req.query.nameNameLogin});
@@ -141,17 +141,21 @@ router.get('/', async (req,res)=>{
 //     if(authorLogin!="")
 //     {
 //         // res.redirect(`/authors/authorlogin.id}`)
-//         res.render('authors/profile.ejs', {
-//             author4: authorLogin, 
-//             // authorLoginPopulate:authorLoginPopulate 
-//         })
+            res.render('authors/profile.ejs',
+            
+            
+            {
+          author4: authorLogin, 
+          // authorLoginPopulate:authorLoginPopulate 
+   }
+)
 //     }
 //     else{
 //         res.redirect('/')
 //     }
 })
 router.get('/login', (req,res)=>{
-//     res.render('authors/login.ejs')
+       res.render('authors/login.ejs')
 //     if(req.query.nameNameLogin==Author.find(req.query.nameNameLogin)){
 //     res.redirect('/authors/afterLogin')== false;
 //     }
@@ -166,17 +170,27 @@ router.get('/login', (req,res)=>{
  router.get('/register', (req, res)=>{
    res.render('../views/authors/register.ejs')
  })
-// // create author route
- router.post('/register',async (req,res)=>{
-   const doesUserExist = await Author.find(req.body.email);
+
+ const giveDog = async function(req, res, next){
+   const doesUserExist = await Author.find(req.body.email)
    if(doesUserExist!=""){
-     res.redirect('/authors/login', {objError: "User exists"});
+     res.redirect('/authors/login')
    }
+   next()
+ }
+
+ 
+// // create author route
+ router.post('/register', giveDog, async (req,res)=>{
+   //  const doesUserExist = await Author.find(req.body.email);
+    // if(doesUserExist!=""){
+   //  res.redirect('/authors/login', {objError: "User exists"});
+    //  }
   const author0 = new Author({
          name2: req.body.name2,
-         email: req.body.email,
+        email: req.body.email,
          password: req.body.password,
-         auth: req.body.auth
+       auth: req.body.auth
     })
       try{
       const newAuthor = await author0.save()
