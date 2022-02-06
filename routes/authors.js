@@ -171,32 +171,37 @@ router.get('/login', (req,res)=>{
    res.render('../views/authors/register.ejs')
  })
 
+ /*
  const giveDog = async function(req, res, next){
-   const doesUserExist = await Author.find(req.body.email)
+   const doesUserExist = await Author.find({email: req.body.email})
    if(doesUserExist!=""){
      res.redirect('/authors/login')
    }
    next()
- }
+ } */
 
  
 // // create author route
- router.post('/register', giveDog, async (req,res)=>{
-   //  const doesUserExist = await Author.find(req.body.email);
-    // if(doesUserExist!=""){
-   //  res.redirect('/authors/login', {objError: "User exists"});
-    //  }
+ router.post('/register', async (req,res)=>{
+     // let doesUserExist = await Author.find({name2: req.body.name2});
+     try{
+   if(req.body.name2== Author.find(req.body.name2)){
+    res.redirect('/authors/login');
+     }
+     
   const author0 = new Author({
          name2: req.body.name2,
         email: req.body.email,
          password: req.body.password,
        auth: req.body.auth
     })
-      try{
+      
+   //     if(doesIserExist==""){
       const newAuthor = await author0.save()
  res.redirect('/authors/profile')
  //    res.redirect(`authors`)
    }
+   //}
       catch{
 //     // This automaticll catches error if a field stays emty in the form
       res.render('authors/new', {
