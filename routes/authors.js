@@ -186,15 +186,15 @@ router.get('/login', (req,res)=>{
      // let doesUserExist = await Author.find({name2: req.body.name2});
     try{
       let x = await Author.find({name2:req.body.name2})
-       if(x!= ""){
+       if(x != ""){
     res.redirect('/authors/login')
    } else{
      
           let author0 = new Author({
          name2: req.body.name2,
-        email: req.body.email,
+         email: req.body.email,
          password: req.body.password,
-       auth: req.body.auth
+         auth: req.body.auth
     })
       
    //     if(doesIserExist==""){
