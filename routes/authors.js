@@ -184,12 +184,13 @@ router.get('/login', (req,res)=>{
 // // create author route
  router.post('/register', async (req,res)=>{
      // let doesUserExist = await Author.find({name2: req.body.name2});
-     try{
-   if(req.body.name2== Author.find(req.body.name2)){
-    res.redirect('/authors/login');
-     }
+    try{
+      let x = await Author.find({name2:req.body.name2})
+       if(x!= ""){
+    res.redirect('/authors/login')
+   } else{
      
-  const author0 = new Author({
+          let author0 = new Author({
          name2: req.body.name2,
         email: req.body.email,
          password: req.body.password,
@@ -200,15 +201,21 @@ router.get('/login', (req,res)=>{
       const newAuthor = await author0.save()
  res.redirect('/authors/profile')
  //    res.redirect(`authors`)
-   }
-   //}
-      catch{
+  // }
+  }
+}
+      catch(err) {
 //     // This automaticll catches error if a field stays emty in the form
-      res.render('authors/new', {
-         author0: author0, 
+      res.render('authors/login', {
+       //  author0: author0, 
          errorMessage: 'Error creating Author'
          })
-       }
+         console.log(err)
+      }
+       
+        // else {
+        //  res.redirect('/authors/login')
+      //  }
  })
 
 //Show author
