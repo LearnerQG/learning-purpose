@@ -5,13 +5,28 @@
 <!-- value="<%= searchOptions.name %>" holds the searched input in the search field -->
 <button type="submit">Search</button>
 </form>
+
+
 <% authors.forEach( author => { %>
-    <div><%= author.name2 %></div>
-    <a href="/authors/<%= author.id %>">view</a>
+
+    
+    <a href="/authors/<%= author.id %>"><%= author.name2 %></a>
+    <br>
+
+    <!--
     <a href="/authors/<%= author.id %>/edit">edit</a>
     <%- include('../partials/deleteForm', {url: `/authors/${author.id}`})%>
+    -->
 <% }) %>
-<h1>Hi <%= name %></h1>
-<form action="/logout?_method=DELETE" method="POST">
-  <button type="submit">Log Out</button>
-</form>
+
+
+
+  
+
+
+
+
+
+
+
+

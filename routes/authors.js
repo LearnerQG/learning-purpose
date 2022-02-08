@@ -10,7 +10,7 @@ router.get('/', async (req,res)=>{
        searchOptions.name2 = new RegExp(req.query.name3, 'i')
     }
     try{
-        const authors = await Author.find(req.body.email);
+        const authors = await Author.find(searchOptions);
         res.render('authors/index.ejs', {
     //This is the comment from the server.js's app.set('view',....)'s comment. {Now in rendering the directory in author.js or in index.js or in any .js of the routes folder, it will not need us to render the whole thing with ../views/... because it has already been declared that the view is coming from /views}
             authors: authors,
