@@ -92,6 +92,7 @@ try{
     )
     }catch {
     res.redirect('books')
+    conseol.error(error)
     }
 }
 
