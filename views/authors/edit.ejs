@@ -1,8 +1,17 @@
 <h2>Edit author</h2>
 <h1><%= author.name2 %></h1>
+<h2><%= author.email %></h2>
+<h2><%= author.password %></h2>
 
 <form action="/authors/<%= author.id %>?_method=Put" method="POST">
-<%- include("_form_fields")%>    
+<!-- <%- include("_form_fields")%>    -->
+<label for="name" >Edit your name: </label>
+<input name="editName" />
+<label for="email" >Edit your email: </label>
+<input name="editEmail" />
+<label for="password"> Edit your password</label>
+<input name="editPassword" />
 <a href="/authors">Cancel</a>
+
 <button type="submit">Update</button>
 </form>

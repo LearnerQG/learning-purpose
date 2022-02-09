@@ -3,6 +3,7 @@ const router = express.Router()
 const {Author} = require('../models/author.js')
 const bcrypt = require('bcrypt')
 const Book = require('../models/book')
+const { localsName } = require('ejs')
 // All author route
 router.get('/', async (req,res)=>{
    let searchOptions = {}
@@ -126,7 +127,7 @@ router.get('/', async (req,res)=>{
   
 
 //       searchOptions.name2 = req.query.nameNameLogin;
-     let authorLogin = await Author.find({name2:req.query.nameNameLogin})
+     let authorLogin = await Author.find({name2:localStorage.getItem('name')})
       // author.auth = req.query.nameNameLogin;
 //       // await author.save();
 //     //   let authorAuth = await Author.find({name2: req.query.nameNameLogin});
@@ -160,7 +161,26 @@ router.get('/login', (req,res)=>{
 //     res.redirect('/authors/afterLogin')== false;
 //     }
  })
- 
+
+router.post('/login', async (req, res)=>{
+  try{
+  let x = await Author.find({name2: req.body.loginName});
+  let y = await Author.find({email: req.body.loginEmail});
+  let z = await Author.find({password: req.body.loginPassword});
+  if(x!="" && z!=""){
+    //   console.error(error);
+    localStorage.setItem('name', req.body.loginName);
+    res.redirect('/authors/profile');
+  }
+    
+    
+
+
+}catch(err){
+  res.redirect('/authors/login')
+console.log(err)
+}
+})
 // New author route
  router.get('/new', (req,res)=>{
     res.render('authors/new.ejs'/*, {author: new Author() }*/)
@@ -261,16 +281,23 @@ router.put('/:id', async (req, res) => {
 let author /* let because we will be using it in the catch as well */
 try {
     author = await Author.findById(req.params.id)
-    author.name2 = req.body.name2;
+    if(req.body.editName!="")
+   { author.name2 = req.body.editName; }
    // let authorLogin = await Author.find({name2:req.query.nameNameLogin})
-       author.auth = req.query.nameNameLogin;
-       await author.save();
+   if (req.body.editEmail)
+      { author.email = req.body.editEmail; }
+
+       if(req.body.editPassword)
+      {
+       author.password = req.body.editPassword; }
+  //     await author.save();
     await author.save()
     res.redirect(`/authors/${author.id}`)
 } catch {
     if(author == null){
         res.redirect('/')
     }else{
+      console.error(error);
         res.render('authors/edit', {
             author: author,
             errorMessage: 'Error Updating Author'
