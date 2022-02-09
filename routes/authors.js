@@ -167,17 +167,20 @@ router.post('/login', async (req, res)=>{
   let x = await Author.find({name2: req.body.loginName});
   let y = await Author.find({email: req.body.loginEmail});
   let z = await Author.find({password: req.body.loginPassword});
-  if(x!="" && z!=""){
+  if(x!="" || z!=""){
     //   console.error(error);
     localStorage.setItem('name', req.body.loginName);
-    res.redirect('/authors/profile');
+    res.redirect('/authors/login');
+  } else {
+    localStorage.setItem('name', req.body.loginName)
+    res.redirect('/authors/profile')
   }
     
     
 
 
 }catch(err){
-  res.redirect('/authors/login')
+  res.redirect('/')
 console.log(err)
 }
 })
@@ -210,8 +213,10 @@ console.log(err)
       let z = await Author.find({
         password:req.body.password
       })
-      let k = await Author.find({auth:req.body.auth})
-       if(x != "" || y != "" || z != "" || k != ""){
+  //    let k = await Author.find({auth:req.body.auth})
+       if(x != "" || y != "" || z != ""
+       // || k!=""
+       ){
     res.redirect('/authors/login')
    } else{
      
