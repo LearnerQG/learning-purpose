@@ -134,8 +134,21 @@ router.get('/', async (req,res)=>{
 //    let searchOptions = {}
   
 
+
+
+
+
+
+
+
+
+
+
+     
+
 //       searchOptions.name2 = req.query.nameNameLogin;
-     let authorLogin = await Author.find({name2:localStorage.getItem('name')})
+     let authorLogin = await Author.find({name2: document.cookie.name})
+      
       // author.auth = req.query.nameNameLogin;
 //       // await author.save();
 //     //   let authorAuth = await Author.find({name2: req.query.nameNameLogin});
@@ -180,10 +193,10 @@ router.post('/login', async (req, res)=>{
    // localstoreset;
     res.redirect('/authors/login');
   } else {
-    if (typeof window != "undefined" || typeof window === "undefined"){
-      localStorage.setItem('name', req.body.loginName)
-    }
-    
+    // if (typeof window !== "undefined" || typeof window === "undefined"){
+    //  localStorage.setItem('name', req.body.loginName)
+    // }
+    document.cookie = 'name=req.body.loginName; expires=new Date(99999, 0, 1)';
     res.redirect('/authors/profile')
   }
     
@@ -222,13 +235,14 @@ console.log(err)
       let x = await Author.find({name2:req.body.name2})
       let y = await Author.find({email:req.body.email})
       let z = await Author.find({
-        password:req.body.password
-      })
-  //    let k = await Author.find({auth:req.body.auth})
-       if(x != "" || y != "" || z != ""
+       password:req.body.password
+       })
+    //  let k = await Author.find({auth:req.body.auth})
+       if(x != "" || y != ""
+        || z != ""
        // || k!=""
        ){
-    res.redirect('/authors/login')
+    res.redirect('/')
    } else{
      
           let author0 = new Author({
@@ -240,7 +254,7 @@ console.log(err)
       
    //     if(doesIserExist==""){
       const newAuthor = await author0.save()
- res.redirect('/authors/profile')
+ res.redirect('/authors/login')
  //    res.redirect(`authors`)
   // }
   }
