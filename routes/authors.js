@@ -237,10 +237,10 @@ console.log(err)
       let z = await Author.find({
        password:req.body.password
        })
-    //  let k = await Author.find({auth:req.body.auth})
+      let k = await Author.find({auth:req.body.auth})
        if(x != "" || y != ""
         || z != ""
-       // || k!=""
+        || k!=""
        ){
     res.redirect('/')
    } else{
