@@ -4,6 +4,14 @@ const {Author} = require('../models/author.js')
 const bcrypt = require('bcrypt')
 const Book = require('../models/book')
 const { localsName } = require('ejs')
+ //  if (typeof window != "undefined" || typeof window === "undefined"){
+     
+ 
+  
+ 
+
+
+  // }
 // All author route
 router.get('/', async (req,res)=>{
    let searchOptions = {}
@@ -167,12 +175,15 @@ router.post('/login', async (req, res)=>{
   let x = await Author.find({name2: req.body.loginName});
   let y = await Author.find({email: req.body.loginEmail});
   let z = await Author.find({password: req.body.loginPassword});
-  if(x!="" || z!=""){
+  if(x=="" || z==""){
     //   console.error(error);
-    localStorage.setItem('name', req.body.loginName);
+   // localstoreset;
     res.redirect('/authors/login');
   } else {
-    localStorage.setItem('name', req.body.loginName)
+    if (typeof window != "undefined" || typeof window === "undefined"){
+      localStorage.setItem('name', req.body.loginName)
+    }
+    
     res.redirect('/authors/profile')
   }
     
