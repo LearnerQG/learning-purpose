@@ -147,7 +147,7 @@ router.get('/', async (req,res)=>{
      
 try{
 //       searchOptions.name2 = req.query.nameNameLogin;
-     let authorLogin = await Author.find({name2: document.cookie.name})
+     let authorLogin = await Author.find({name2: req.cookies.name})
       if(authorLogin==""){
         res.redirect('/')
       }
