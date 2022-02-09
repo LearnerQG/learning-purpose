@@ -27,7 +27,7 @@ const methodOverride = require('method-override')
 const indexRouter = require('./routes/index')  
 const authorRouter = require('./routes/authors.js')
 const bookRouter = require('./routes/books.js')
-
+const cookieParser = require('cookie-parser')
 app.set('view engine','ejs')    
 
 app.set('views', __dirname + '/views')   
@@ -44,6 +44,8 @@ app.use(express.static('public'))
 
 app.use(bodyParser.urlencoded({ limit: '10mb', extended:false})) // app.use(bodyParser.urlencoded({ limit: '10mb', extended:false})) must be used before const mongoose = require('mongoose')
 // Otherwise it will throw an error while displaying the submitted input to the post route with '/'
+
+app.use(cookieParser())
 
 const mongoose = require('mongoose')
 
