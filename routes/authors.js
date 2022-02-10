@@ -147,7 +147,8 @@ router.get('/', async (req,res)=>{
      
 try{
 //       searchOptions.name2 = req.query.nameNameLogin;
-     let authorLogin = await Author.find({name2: req.cookies.name})
+     let authorLogin = await Author.find({name2: req.cookies['name']})
+     console.log(req.cookies['name'])
       if(authorLogin==""){
         res.redirect('/')
       }
@@ -205,6 +206,7 @@ router.post('/login', async (req, res)=>{
     //  localStorage.setItem('name', req.body.loginName)
     // }
     res.cookie = 'name=req.body.loginName; expires=new Date(99999, 0, 1)';
+    console.log(req.cookies['name'])
     res.redirect('/authors/profile')
   }
     
