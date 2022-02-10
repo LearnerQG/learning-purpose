@@ -205,7 +205,7 @@ router.post('/login', async (req, res)=>{
     // if (typeof window !== "undefined" || typeof window === "undefined"){
     //  localStorage.setItem('name', req.body.loginName)
     // }
-    res.cookie('name=req.body.loginName', req.body.loginName, {expires:new Date(Date.now()+60*1000*60*60*2)})
+    res.cookie('name', req.body.loginName, {expires:new Date(Date.now()+60*1000*60*60*2)})
     console.log(req.cookies['name'])
     res.redirect('/authors/profile')
   }
