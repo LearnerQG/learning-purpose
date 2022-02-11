@@ -14,11 +14,11 @@ const authorSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    
+    /*
     auth:{
         type: String,
         required: true,
-    } 
+    } */
 })
 
 authorSchema.pre('remove', function(next){

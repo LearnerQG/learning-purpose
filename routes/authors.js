@@ -247,10 +247,10 @@ console.log(err)
       let z = await Author.find({
        password:req.body.password
        })
-      let k = await Author.find({auth:req.body.auth})
+      // let k = await Author.find({auth:req.body.auth})
        if(x != "" || y != ""
         || z != ""
-        || k!=""
+      //  || k!=""
        ){
     res.redirect('/')
    } else{
@@ -259,7 +259,7 @@ console.log(err)
          name2: req.body.name2,
          email: req.body.email,
          password: req.body.password,
-         auth: req.body.auth
+     //    auth: req.body.auth
     })
       
    //     if(doesIserExist==""){
@@ -285,11 +285,18 @@ console.log(err)
 
 
 // logout route
-router.post('/logout', (req, res)=>{
-  res.deleteCookie['name'];
-  console.log(req.cookies['name']);
-  res.redirect('/authors/login');
+router.get('/logout', (req, res)=>{
   
+ // res.cookie('name', "")
+ // console.log(req.cookies['name']);
+  res.render('../views/authors/login.ejs')
+ // res.redirect('/authors/login');
+  
+
+
+  // console.log(e)
+//  res.redirect('/authors')
+
 }
 )
 
