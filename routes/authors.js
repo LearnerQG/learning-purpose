@@ -283,6 +283,16 @@ console.log(err)
       //  }
  })
 
+
+// logout route
+router.post('/logout', (req, res)=>{
+  res.deleteCookie['name'];
+  console.log(req.cookies['name']);
+  res.redirect('/authors/login');
+  
+}
+
+
 //Show author
 router.get('/:id', async (req, res) => {
 try{

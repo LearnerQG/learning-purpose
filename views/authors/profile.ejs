@@ -9,5 +9,8 @@
       <!-- <a href="/authors/<%= author.id %>/edit">edit</a> -->
       <%- include('../partials/deleteForm', {url: `/authors/${author.id}`})%>
   <% }) %>
+  <br>
+   <br>
+   <a href="/authors/logout" method="POST" ></a>
 </div>
 
