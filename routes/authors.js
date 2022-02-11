@@ -285,18 +285,18 @@ console.log(err)
 
 
 // logout route
-router.get('/logout', (req, res)=>{
-  
- // res.cookie('name', "")
- // console.log(req.cookies['name']);
+router.post('/logout', (req, res)=>{
+  try{
+  res.cookie('name','')
+  console.log(req.cookies['name']);
   res.render('../views/authors/login.ejs')
  // res.redirect('/authors/login');
-  
+  }catch(e) {
 
 
   // console.log(e)
 //  res.redirect('/authors')
-
+  }
 }
 )
 
