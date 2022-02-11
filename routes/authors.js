@@ -147,9 +147,9 @@ router.get('/', async (req,res)=>{
      
 try{
 //       searchOptions.name2 = req.query.nameNameLogin;
-if(req.cookies['name']!=="undefined"){
+
      let authorLogin = await Author.find({name2: req.cookies['name']})
-}
+
      console.log(req.cookies['name'])
       if(authorLogin==""){
         res.redirect('/authors/login')
