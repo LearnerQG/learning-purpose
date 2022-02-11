@@ -147,10 +147,12 @@ router.get('/', async (req,res)=>{
      
 try{
 //       searchOptions.name2 = req.query.nameNameLogin;
+if(req.cookies['name']!=="undefined"){
      let authorLogin = await Author.find({name2: req.cookies['name']})
+}
      console.log(req.cookies['name'])
       if(authorLogin==""){
-        res.redirect('/')
+        res.redirect('/authors/login')
       }
       // author.auth = req.query.nameNameLogin;
 //       // await author.save();
@@ -287,7 +289,7 @@ console.log(err)
 // logout route
 router.post('/logout', (req, res)=>{
   try{
-  res.cookie('name','')
+  res.clearCookie('name')
   console.log(req.cookies['name']);
   res.render('../views/authors/login.ejs')
  // res.redirect('/authors/login');
