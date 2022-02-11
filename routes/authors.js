@@ -291,7 +291,7 @@ router.post('/logout', (req, res)=>{
   res.redirect('/authors/login');
   
 }
-
+)
 
 //Show author
 router.get('/:id', async (req, res) => {
