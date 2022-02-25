@@ -5,7 +5,7 @@ const path = require('path')
 const fs = require('fs')
 const Book = require('../models/book.js')
 const uploadPath = path.join('public', Book.coverImageBasePath)
-const Author = require('../models/author.js')
+const {Author}= require('../models/author.js')
 const imageMimeTypes = ['image/png', 'image/png', 'image/png']
 const upload = multer({
     dest: uploadPath,
@@ -74,7 +74,8 @@ function removeBookCover(fileName){
 async function renderNewPage/* this renderNewPage is called identifier */(res, book /* So when i wrote new Book() in the second parameter of the renderNewPage function in the new book route iwhat happened is the value of the book here became new Book() and it acted as const book = new Book() */, hassError = false) {
 try{
     // const book =await new Book() // this mustn't be here
-    const authors = await Author.find({})
+    searchOptions ={}
+    const authors = await Author.find(searchOptions)
     const params /* we store the {....} of res.render('',{}) that was in the create route of the authors.js of the routes folder */ = {
         book: book,
         authors: authors
@@ -90,9 +91,9 @@ try{
     res.render('books/new',
         params /* in here it will not be inside { } because it itself has the {....} */
     )
-    }catch {
+    }catch (x) {
     res.redirect('books')
-    conseol.error(error)
+    console.log(x)
     }
 }
 
