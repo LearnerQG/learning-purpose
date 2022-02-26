@@ -56,14 +56,14 @@ try{
 const newBook = await book.save()
 // res.redirect(`books/${newBook.id}`)
 res.redirect(`books`)
-}catch{
+}catch (e){
     if (book.coverImageName!=null){
         removeBookCover(book.coverImageName /* So when i wrote new Book() in the second parameter of the renderNewPage function in this new book route what happened is the value of the fileName in the main fucntion which is below became book.coverImageName and it acted as const fileName = book.coverImageName */)
     }
 
         // This catch automatically catches error if a field stays emty in the form
     renderNewPage(res, book /* this reffers the existing book that has been defined in this create new route with const and not the new Book() of the new Book route*/, true)
-
+    console.log(e)
 }
 })
 
