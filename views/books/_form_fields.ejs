@@ -5,14 +5,17 @@
 <select name="author3">
     <% authors.forEach( author => {%>
         <% if(author.id===book.author){%>
-        <option selected label="<%=author.name%>" value="<%=author.id%>"> 
+        <option selected label="<%=author.name2 %>" value="<%=author.id%>"> 
         <% } else { %>
-        <option label="<%=author.name%>" value="<%=author.id%>">
+        <option label="<%=author.name2 %>" value="<%=author.id%>">
             <!-- Only the value of this 2nd label gets sown in the select box in the web page even if all the other label and value of the first option tag and the value="" gets removed -->
         <% } %>
     <% }) %>
     
     </select>
+</div>
+<div>CoverImageName:
+    <input type="text" name="coverImageName2">
 </div>
 <div>
     <label>Publish Date</label>

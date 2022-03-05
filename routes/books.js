@@ -49,7 +49,9 @@ const book = new Book({
     author1: req.body.author3,
     publishDate: new Date(req.body.publishDate2),
     pageCount: req.body.pageCount2,
-    coverImageName: fileName,
+    coverImageName: req.body.coverImageName2
+    // fileName
+    ,
     description: req.body.description2
 })
 try{
